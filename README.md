@@ -40,7 +40,7 @@ It was designed to be used in the context of a specific project directory (Works
 
 ## Usage
 
-```
+```java
 JExplorerPanel fileExplorerPanel = new JExplorerPanel(new File(root));
 jframe.add(fileExplorerPanel, BorderLayout.CENTER);
 ```
