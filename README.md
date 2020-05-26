@@ -1,4 +1,4 @@
-# JExplorerTree
+# JExplorerTree ![Java CI with Maven](https://github.com/ricardojlrufino/JExplorerTree/workflows/Java%20CI%20with%20Maven/badge.svg)
 Component for file management, with basic operations and DnD support
 
 ![Diagram](./docs/demo.gif)
