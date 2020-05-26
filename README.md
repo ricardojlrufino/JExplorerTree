@@ -79,25 +79,6 @@ Waiting for contributions to complement these features. ;)
 - [ ] Undo / Delete - Files from diferent paths #2
 
 
-## Build
-
-The project uses maven for its construction. To obtain the JAR, run:
-
-```
-mvn clean package
-```
-
-You can use simple provided example:
-JExplorerTree/src/examples/FileExplorerPanelDemo.java  
-`java -jar target/jexplorertree-0.0.1-SNAPSHOT.jar`
-
-## Projects Using:
-
-- https://github.com/ricardojlrufino/Arduino
-
-Add your project here !
-
-
 ## Undo
 
 The undo operation is limited to **5 actions**, as it is difficult to maintain consistency .. needing further tests to fully validate.
@@ -114,5 +95,29 @@ ls /tmp/jfileexpl*
 package.html*
 
 ```
+
+## Build
+
+The project uses maven for its construction. To obtain the JAR, run:
+
+```
+mvn clean package
+```
+
+## Download
+
+<https://github.com/ricardojlrufino/JExplorerTree/releases>
+
+You can use simple provided example:
+JExplorerTree/src/examples/FileExplorerPanelDemo.java  
+`java -jar target/jexplorertree-0.0.1-SNAPSHOT.jar`
+
+## Projects Using:
+
+- https://github.com/ricardojlrufino/Arduino
+
+Add your project here !
+
+
 
 
