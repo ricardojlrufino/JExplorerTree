@@ -88,7 +88,7 @@ public class JExplorerPanel extends JPanel {
     this.rootDir = rootDir;
     initComponents();
     initMenus();
-    initKeyboad();
+    initKeyboard();
   }
 
   private void initComponents() {
@@ -127,12 +127,12 @@ public class JExplorerPanel extends JPanel {
       public void handleTranferFile(List<File> files) {
         try {
           if (currentFileTransferable instanceof FileTransferable) { // from Internal DnD Move / Ctrl+X
-            JExplorerPanel.this.handleTranferFile(files, currentFileTransferable.isMove());
+            JExplorerPanel.this.handleTransferFile(files, currentFileTransferable.isMove());
           } else {
-            JExplorerPanel.this.handleTranferFile(files, false);
+            JExplorerPanel.this.handleTransferFile(files, false);
           }
         } catch (IOException e) {
-          showExeption(e.getMessage(), e);
+          showException(e.getMessage(), e);
         }
       }
     });
@@ -232,7 +232,7 @@ public class JExplorerPanel extends JPanel {
     configureMenu(popup);
   }
   
-  protected void initKeyboad() {
+  protected void initKeyboard() {
     
     tree.addKeyListener(new KeyAdapter() {
       @Override
@@ -357,12 +357,8 @@ public class JExplorerPanel extends JPanel {
     JOptionPane.showMessageDialog(this, message, title, JOptionPane.INFORMATION_MESSAGE);
   }
   
-  public void showExeption(String string, Exception e) {
+  public void showException(String string, Exception e) {
     e.printStackTrace();
-        // TODO Auto-generated method stub
-     // TODO Auto-generated method stub
-     // TODO Auto-generated method stub
-     // TODO Auto-generated method stub
   }
   
   protected void configureTree(JTree tree) {};
@@ -550,7 +546,7 @@ public class JExplorerPanel extends JPanel {
 
   protected void handleUndo() {
     
-    FileOperation lasFileOperation = getLasFileOperation();
+    FileOperation lasFileOperation = getLastFileOperation();
     
     if(lasFileOperation != null) {
       
@@ -608,12 +604,12 @@ public class JExplorerPanel extends JPanel {
   // JTree methods
   // ================================================================
   
-  public FileOperation getLasFileOperation() {
+  public FileOperation getLastFileOperation() {
     if (undoQueue.isEmpty()) return null;
     return (FileOperation) undoQueue.pop();
   }
   
-  public void handleTranferFile(List<File> files, boolean isMove) throws IOException {
+  public void handleTransferFile(List<File> files, boolean isMove) throws IOException {
 
     TreePath selectionPath = tree.getSelectionPath();
     File targetFolder = getSelectedFile();
