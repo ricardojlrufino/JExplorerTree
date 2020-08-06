@@ -7,6 +7,7 @@
 package com.ricardojlrufino.jexplorer;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -14,12 +15,36 @@ import java.util.Comparator;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
+
+import com.ricardojlrufino.jexplorer.utils.AcceptAllFileFilter;
 
 public class FileTreeModel extends DefaultTreeModel {
 
   public FileTreeModel(TreeNode root) {
     super(root);
+  }
+
+  public FileFilter getFileFilter() {
+    if(getRoot() instanceof FileTreeNode) {
+      return ((FileTreeNode) getRoot()).getFileFilter();
+    } else {
+      return new AcceptAllFileFilter();
+    }
+  }
+
+  public void setFileFilter(FileFilter fileFilter) {
+    final FileTreeNode root = (FileTreeNode) getRoot();
+    root.setFileFilter(fileFilter);
+    root.reloadChildren();
+    nodeStructureChanged(root);
+  }
+
+  @Override
+  public void setRoot(TreeNode root) {
+    // keep the file filter
+    FileFilter fileFilter=getFileFilter();
+    super.setRoot(root);
+    setFileFilter(fileFilter);
   }
 
 //  @Override
@@ -44,6 +69,8 @@ public class FileTreeModel extends DefaultTreeModel {
   
     private File file; // user object
   
+    private FileFilter fileFilter=new AcceptAllFileFilter();
+
     public FileTreeNode(File f) {
   
       this.file = f;
@@ -157,13 +184,12 @@ public class FileTreeModel extends DefaultTreeModel {
           interim = false;
         }
   
-        String[] names = f.list(); // Get list of contents
+        File[] files = f.listFiles(getFileFilter()); // Get list of contents
   
         // Process the contents
         ArrayList list = new ArrayList();
-        for (int i = 0; i < names.length; i++) {
-          String name = names[i];
-          File d = new File(file, name);
+        for (int i = 0; i < files.length; i++) {
+          File d = files[i];
           try {
             FileTreeNode node = new FileTreeNode(d);
             list.add(node);
@@ -264,5 +290,21 @@ public class FileTreeModel extends DefaultTreeModel {
     protected boolean interim; // true if we are in interim state
   
     protected boolean isDir; // true if this is a directory
+
+    public FileFilter getFileFilter() {
+      if(getParent()!=null){
+        return ((FileTreeNode)getParent()).getFileFilter();
+      } else {
+        return this.fileFilter;
+      }
+    }
+
+    public void setFileFilter(FileFilter fileFilter) {
+      if(getParent() instanceof FileTreeNode){
+        ((FileTreeNode)getParent()).setFileFilter(fileFilter);
+      } else {
+        this.fileFilter = fileFilter;
+      }
+    }
   }
 }

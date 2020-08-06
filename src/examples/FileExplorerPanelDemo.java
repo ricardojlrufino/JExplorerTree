@@ -2,15 +2,20 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileFilter;
 import java.util.prefs.Preferences;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import com.ricardojlrufino.jexplorer.JExplorerPanel;
+import com.ricardojlrufino.jexplorer.utils.AcceptAllFileFilter;
 
 public class FileExplorerPanelDemo extends JFrame {
 
@@ -26,7 +31,37 @@ public class FileExplorerPanelDemo extends JFrame {
         this.setSize(500, 500);
         this.setLayout(new BorderLayout());
         this.add(fileExplorerPanel);
-        
+
+        // Add File Filter
+        JTextField filterTextField=new JTextField();
+        filterTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                changedUpdate(e);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                changedUpdate(e);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                String text=filterTextField.getText();
+                if(text==null||text.trim().isEmpty()){
+                    fileExplorerPanel.setFileFilter(new AcceptAllFileFilter());
+                } else {
+                    fileExplorerPanel.setFileFilter(new FileFilter() {
+                        @Override
+                        public boolean accept(File pathname) {
+                            return pathname.getName().contains(text);
+                        }
+                    });
+                }
+            }
+        });
+        this.add(filterTextField, BorderLayout.NORTH);
+
         // Add Buton to change...
         JButton button = new JButton("Browse");
         button.addActionListener(new ActionListener() {

@@ -66,16 +66,14 @@ public class JExplorerPanel extends JPanel {
 
   /** File-system tree. Built Lazily */
   private JTree tree;
-  private DefaultTreeModel treeModel;
+  private FileTreeModel treeModel;
   
   protected JPopupMenu popup;
 
   private File rootDir;
   
   private FileTreeNode rootNode;
-  
-  private FileFilter fileFilter = new AcceptAllFileFilter(); // TODO: TO IMPLEMENT...
-  
+
   private Translate translate;
   
   // Alow Ctrl+Z last file operation.
@@ -289,7 +287,7 @@ public class JExplorerPanel extends JPanel {
   }
   
   public void setFileFilter(FileFilter fileFilter) {
-    this.fileFilter = fileFilter;
+    treeModel.setFileFilter(fileFilter);
   }
   
   public JTree getTree() {
@@ -301,9 +299,13 @@ public class JExplorerPanel extends JPanel {
    */
   public void replaceWorkingDirectory( File selectedFile ) {
       this.rootDir = selectedFile;
-      
+
+      FileFilter fileFilter=rootNode.getFileFilter();
+
       // the File tree
       rootNode = new FileTreeNode(rootDir);
+
+      rootNode.setFileFilter(fileFilter);
 
       // Populate the root node with its subdirectories
       rootNode.populateDirectories(true);
@@ -429,7 +431,7 @@ public class JExplorerPanel extends JPanel {
    * Detect new external files on root directory
    */
   private boolean detectRootChanges() {
-    File[] listFiles = rootDir.listFiles(fileFilter);
+    File[] listFiles = rootDir.listFiles(treeModel.getFileFilter());
     return rootNode.getChildCount() != listFiles.length;
   }
   
