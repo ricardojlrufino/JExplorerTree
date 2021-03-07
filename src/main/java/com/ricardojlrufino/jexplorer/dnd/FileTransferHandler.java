@@ -28,7 +28,7 @@ import com.ricardojlrufino.jexplorer.utils.StringUtils;
 /**
  * Handle Internal and Externaml DND Actions
  * @author Ricardo JL Rufino - (ricardo.jl.rufino@gmail.com)
- * @date 25 de mai de 2020
+ * @version 25 de mai de 2020
  */
 public abstract class FileTransferHandler extends TransferHandler {
   

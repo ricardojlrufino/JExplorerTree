@@ -26,10 +26,10 @@ public class StringUtils {
      * OS X (character 160, or 0x00A0 in hex).
      * 
      * <PRE>
-     * i.e. splitTokens("a b") -> { "a", "b" }
-     *      splitTokens("a    b") -> { "a", "b" }
-     *      splitTokens("a\tb") -> { "a", "b" }
-     *      splitTokens("a \t  b  ") -> { "a", "b" }
+     * i.e. splitTokens("a b") -&gt; { "a", "b" }
+     *      splitTokens("a    b") -&gt; { "a", "b" }
+     *      splitTokens("a\tb") -&gt; { "a", "b" }
+     *      splitTokens("a \t  b  ") -&gt; { "a", "b" }
      * </PRE>
      */
     static public String[] splitTokens( String what ) {
@@ -43,14 +43,14 @@ public class StringUtils {
      * appear in the returned String array.
      * 
      * <PRE>
-     * i.e. splitTokens("a, b", " ,") -> { "a", "b" }
+     * i.e. splitTokens("a, b", " ,") -&gt; { "a", "b" }
      * </PRE>
      * 
      * To include all the whitespace possibilities, use the variable WHITESPACE,
      * found in PConstants:
      * 
      * <PRE>
-     * i.e. splitTokens("a   | b", WHITESPACE + "|");  ->  { "a", "b" }
+     * i.e. splitTokens("a   | b", WHITESPACE + "|");  -&gt;  { "a", "b" }
      * </PRE>
      */
     static public String[] splitTokens( String what , String delim ) {

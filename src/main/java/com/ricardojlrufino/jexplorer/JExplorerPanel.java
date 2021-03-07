@@ -54,11 +54,11 @@ import com.ricardojlrufino.jexplorer.utils.Translate;
 
 
 /**
- * A file explorer supporting file operations (copy, delete, remove) and others and with drag & drop support <br/>
- * It was designed to be used in the context of a specific project directory (Workspace). <br/>
+ * A file explorer supporting file operations (copy, delete, remove) and others and with drag &amp; drop support <br>
+ * It was designed to be used in the context of a specific project directory (Workspace). <br>
  * It is not designed to browse a full file system.
  * @author Ricardo JL Rufino - (ricardo.jl.rufino@gmail.com)
- * @date 24 de mai de 2020
+ * @version  24 de mai de 2020
  */
 public class JExplorerPanel extends JPanel {
 
