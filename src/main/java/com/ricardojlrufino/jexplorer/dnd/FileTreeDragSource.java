@@ -24,7 +24,7 @@ import com.ricardojlrufino.jexplorer.dnd.FileTransferHandler.FileTransferable;
  * Prepare DragSource to COPY/MOVE to External And Internal
  * 
  * @author Ricardo JL Rufino - (ricardo.jl.rufino@gmail.com)
- * @date 25 de mai de 2020
+ * @version 25 de mai de 2020
  */
 public class FileTreeDragSource implements DragGestureListener, DragSourceListener {
 
